@@ -4,24 +4,19 @@ import java.sql.Connection;
 
 public class DataSourceConnection {
 	public static void main(String[] args){
-		DataSourceFactory dbFactoryMySql1=DataSourceFactory.getDataSource(DataSource.MYSQL);
-		Connections dbConnnectionMySql1=dbFactoryMySql1.getConnection();
-		System.out.println(dbConnnectionMySql1);
-		Connection connMySql1=dbConnnectionMySql1.connect();
-		
-		DataSourceFactory dbFactoryMySql2=DataSourceFactory.getDataSource(DataSource.MYSQL);
-		Connections dbConnnectionMySql2=dbFactoryMySql2.getConnection();
-		System.out.println(dbConnnectionMySql2);
-		Connection connMySql2=dbConnnectionMySql2.connect();
-		
-		
-		DataSourceFactory dbFactoryDerby=DataSourceFactory.getDataSource(DataSource.DERBY);
-		Connections dbConnnectionDerby=dbFactoryDerby.getConnection();
-		Connection connDerby=dbConnnectionDerby.connect();
-		
-		DataSourceFactory dbFactoryOracle=DataSourceFactory.getDataSource(DataSource.ORACLE);
-		Connections dbConnnectionOracle=dbFactoryOracle.getConnection();
-		Connection connOracle=dbConnnectionOracle.connect();
-		
+		DataSourceFactory database=DataSourceFactory.getDataSourceFactory(DataSourceName.DATABASE);
+		DataSource mySQLDataSource=database.getDataSource(DataSourceType.MYSQL);
+		mySQLDataSource.getConnections().connect();
+				
+		DataSource derbyDataSource=database.getDataSource(DataSourceType.DERBY);
+		derbyDataSource.getConnections().connect();
+//				
+//		DataSource oracleDataSource=database.getDataSource(DataSourceType.ORACLE);
+//		oracleDataSource.getConnections().connect();
+				
+		DataSourceFactory fileSystem=DataSourceFactory.getDataSourceFactory(DataSourceName.FILE);
+		DataSource fileSystemDataSource=fileSystem.getDataSource(DataSourceType.FILE);
+		System.out.println(fileSystemDataSource.getClass());
+	
 	}
 }

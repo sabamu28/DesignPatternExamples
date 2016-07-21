@@ -1,9 +1,8 @@
 package com.designPattern.creational.abstractFactory;
 
-public class DerbyFactory extends DataSourceFactory{
+public class DerbyDataSource extends DataSource{
 
-	@Override
-	public Connections getConnection() {
+	public Connections getConnections() {
 		return DerbyConnection.getInstance();
 	}
 	
