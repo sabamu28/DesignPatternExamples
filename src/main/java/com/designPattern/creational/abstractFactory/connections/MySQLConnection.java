@@ -1,4 +1,4 @@
-package com.designPattern.creational.abstractFactory;
+package com.designPattern.creational.abstractFactory.connections;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

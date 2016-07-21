@@ -1,4 +1,8 @@
-package com.designPattern.creational.abstractFactory;
+package com.designPattern.creational.abstractFactory.factory;
+
+import com.designPattern.creational.abstractFactory.datasource.DataSource;
+import com.designPattern.creational.abstractFactory.enums.DataSourceName;
+import com.designPattern.creational.abstractFactory.enums.DataSourceType;
 
 public abstract class DataSourceFactory {
 

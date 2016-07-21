@@ -1,29 +1,30 @@
-package com.designPattern.creational.abstractFactory;
+package com.designPattern.creational.abstractFactory.connections;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class OracleConnection extends Connections {
-	private static OracleConnection instance=null;
+public class DerbyConnection extends Connections{
+	private static DerbyConnection instance=null;
 
 	private	Connection conn=null;
 
 
-	private OracleConnection() {
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
+	private DerbyConnection() {
+		 try {
+			Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}  
+		}
+		//add driver for derby
 	}
 
 	public static Connections getInstance(){
 		if(instance==null){
-			synchronized (OracleConnection.class) {
+			synchronized (DerbyConnection.class) {
 				if(instance==null){
-					instance =new OracleConnection();
+					instance =new DerbyConnection();
 				}
 			}
 		}
@@ -34,28 +35,30 @@ public class OracleConnection extends Connections {
 	@Override
 	public Connection connect() {
 		if(conn==null){
-			synchronized (OracleConnection.class) {
+			synchronized (DerbyConnection.class) {
 				if(conn==null){
 					try {
 						conn= DriverManager.getConnection(
-									"jdbc:oracle:thin:@localhost:1521:xe"
+									"jdbc:derby:testdb;create=true"
 							        );
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}	
-
-					//add connection code for oracle
-					System.out.println("Trying to connect to Oracle Database");
+					//add connection code for derby
+					System.out.println("Trying to connect Derby Database");
 				}
 			}
 
 		}
+		
 		if(conn!=null){
-			System.out.println("Connected to Oracle Database");
+			System.out.println("Connected to Derby Database");
 		}else{
-			System.out.println("Connection to Oracle Database Failed");
+			System.out.println("Connection to Derby Failed");
+
 		}
+
 		return conn;
 	}
 }

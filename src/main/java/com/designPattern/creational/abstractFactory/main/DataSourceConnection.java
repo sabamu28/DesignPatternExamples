@@ -1,6 +1,9 @@
-package com.designPattern.creational.abstractFactory;
+package com.designPattern.creational.abstractFactory.main;
 
-import java.sql.Connection;
+import com.designPattern.creational.abstractFactory.datasource.DataSource;
+import com.designPattern.creational.abstractFactory.enums.DataSourceName;
+import com.designPattern.creational.abstractFactory.enums.DataSourceType;
+import com.designPattern.creational.abstractFactory.factory.DataSourceFactory;
 
 public class DataSourceConnection {
 	public static void main(String[] args){
@@ -16,6 +19,8 @@ public class DataSourceConnection {
 				
 		DataSourceFactory fileSystem=DataSourceFactory.getDataSourceFactory(DataSourceName.FILE);
 		DataSource fileSystemDataSource=fileSystem.getDataSource(DataSourceType.FILE);
+		fileSystemDataSource.setName("/src/main/resources/com/designPattern/testFile/csv/testFile.csv");
+		fileSystemDataSource.getConnections();
 		System.out.println(fileSystemDataSource.getClass());
 	
 	}
