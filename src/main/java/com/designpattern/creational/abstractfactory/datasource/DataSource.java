@@ -1,6 +1,6 @@
-package com.designPattern.creational.abstractFactory.datasource;
+package com.designpattern.creational.abstractfactory.datasource;
 
-import com.designPattern.creational.abstractFactory.connections.Connections;
+import com.designpattern.creational.abstractfactory.connections.Connections;
 
 public abstract class DataSource {
 	protected String filePath;

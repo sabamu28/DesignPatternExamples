@@ -1,10 +1,10 @@
-package com.designPattern.creational.abstractFactory.connections;
+package com.designpattern.creational.abstractfactory.connections;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DerbyConnection extends Connections{
+public class DerbyConnection implements Connections{
 	private static DerbyConnection instance=null;
 
 	private	Connection conn=null;

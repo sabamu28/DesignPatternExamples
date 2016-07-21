@@ -1,29 +1,29 @@
-package com.designPattern.creational.abstractFactory.connections;
+package com.designpattern.creational.abstractfactory.connections;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class MySQLConnection extends Connections {
-	private static MySQLConnection instance=null;
+public class OracleConnection implements Connections {
+	private static OracleConnection instance=null;
 
 	private	Connection conn=null;
 
 
-	private MySQLConnection() {
+	private OracleConnection() {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("oracle.jdbc.driver.OracleDriver");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}  
 	}
 
 	public static Connections getInstance(){
 		if(instance==null){
-			synchronized (MySQLConnection.class) {
+			synchronized (OracleConnection.class) {
 				if(instance==null){
-					instance =new MySQLConnection();
+					instance =new OracleConnection();
 				}
 			}
 		}
@@ -34,31 +34,28 @@ public class MySQLConnection extends Connections {
 	@Override
 	public Connection connect() {
 		if(conn==null){
-			synchronized (MySQLConnection.class) {
+			synchronized (OracleConnection.class) {
 				if(conn==null){
 					try {
 						conn= DriverManager.getConnection(
-								"jdbc:mysql://localhost:3306/"
-								);
+									"jdbc:oracle:thin:@localhost:1521:xe"
+							        );
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}	
-					//add connection code
-					System.out.println("Trying to connect to MySQL Database");
+
+					//add connection code for oracle
+					System.out.println("Trying to connect to Oracle Database");
 				}
 			}
 
 		}
-
 		if(conn!=null){
-			System.out.println("Connected to MySQL Database");
+			System.out.println("Connected to Oracle Database");
 		}else{
-			System.out.println("Connection to MySQL failed");
-
+			System.out.println("Connection to Oracle Database Failed");
 		}
 		return conn;
 	}
-
-
 }
